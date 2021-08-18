@@ -46,6 +46,7 @@ _LOGGER = logging.getLogger(__name__)
 
 ICON = "mdi:theme-light-dark"
 
+
 CONF_LIGHTS_CT = "lights_ct"
 CONF_LIGHTS_RGB = "lights_rgb"
 CONF_LIGHTS_XY = "lights_xy"
@@ -61,9 +62,15 @@ CONF_DISABLE_ENTITY = "disable_entity"
 CONF_DISABLE_STATE = "disable_state"
 CONF_INITIAL_TRANSITION, DEFAULT_INITIAL_TRANSITION = "initial_transition", 1
 CONF_ONLY_ONCE = "only_once"
-CONF_HUE_USERNAME = "hue_username"
 CONF_HUE_KEYWORD  = "hue_keyword"
-CONF_HUE_BRIDGE   = "hue_bridge"
+
+entriesJson = open('/config/.storage/core.config_entries',)
+response = json.load(entriesJson)
+for entry in response["data"]["entries"]:
+    if entry["title"] == "Philips hue":
+        break
+CONF_HUE_BRIDGE = entry["data"]["host"]
+CONF_HUE_USERNAME = entry["data"]["username"]
 
 PLATFORM_SCHEMA = vol.Schema(
     {
