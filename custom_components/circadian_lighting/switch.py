@@ -61,9 +61,15 @@ CONF_DISABLE_ENTITY = "disable_entity"
 CONF_DISABLE_STATE = "disable_state"
 CONF_INITIAL_TRANSITION, DEFAULT_INITIAL_TRANSITION = "initial_transition", 1
 CONF_ONLY_ONCE = "only_once"
-CONF_HUE_USERNAME = "hue_username"
-CONF_HUE_KEYWORD  = "hue_keyword"
-CONF_HUE_BRIDGE   = "hue_bridge"
+CONF_HUE_KEYWORD  = "Circadian"
+
+entriesJson = open('/config/.storage/core.config_entries',)
+response = json.load(entriesJson)
+for entry in response["data"]["entries"]:
+    if entry["title"] == "Philips hue":
+        break
+CONF_HUE_BRIDGE = entry["data"]["host"]
+CONF_HUE_USERNAME = entry["data"]["username"]
 
 PLATFORM_SCHEMA = vol.Schema(
     {
@@ -346,7 +352,7 @@ class CircadianSwitch(SwitchEntity, RestoreEntity):
         return await self._update_switch(
             lights, transition=self._initial_transition, force=True
         )
-    
+
     async def update_hue_run(self,websession):
         bridges = await discover_nupnp(websession)
 
