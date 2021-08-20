@@ -1,9 +1,11 @@
 {
   "domain": "circadian_lighting",
   "name": "Circadian Lighting",
-  "documentation": "https://github.com/robertomano24/hass-circadian_lighting",
-  "codeowners": [],
-  "version": "1.0.15",
-  "dependencies": [],
-  "requirements": ["timezonefinder==4.2.0"]
+  "version": "2.0.4",
+  "documentation": "https://github.com/claytonjn/hass-circadian_lighting",
+  "issue_tracker": "https://github.com/claytonjn/hass-circadian_lighting/issues",
+  "dependencies": ["sensor","switch"],
+  "codeowners": ["@claytonjn"],
+  "requirements": [],
+  "iot_class": "calculated"
 }
